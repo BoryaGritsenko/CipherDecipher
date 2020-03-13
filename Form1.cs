@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace CipherDecipher
 {
-    public partial class Form1 : Form
+    public partial class CipherForm : Form
     {
-        public Form1()
+        public CipherForm()
         {
             InitializeComponent();
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void CipherForm_SizeChanged(object sender, EventArgs e)
+        {
+            splitContainer1.SplitterDistance = ClientSize.Height / 2;
         }
     }
 }
