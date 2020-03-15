@@ -31,24 +31,25 @@
             this.CipherTabControl = new System.Windows.Forms.TabControl();
             this.CaesarTab = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.LeftCaesarTextBox = new System.Windows.Forms.TextBox();
-            this.RightCaesarTextBox = new System.Windows.Forms.TextBox();
+            this.CaesarStepLabel = new System.Windows.Forms.Label();
+            this.CaesarProcessModeComboBox = new System.Windows.Forms.ComboBox();
+            this.CaesarBeforeProcessButton = new System.Windows.Forms.Button();
+            this.CaesarPasteButton = new System.Windows.Forms.Button();
+            this.CaesarBeforeProccesTextBox = new System.Windows.Forms.TextBox();
+            this.SaveToFileButton = new System.Windows.Forms.Button();
+            this.CaesarCopyButton = new System.Windows.Forms.Button();
+            this.CaesarAfterProcessTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.VigenereTab = new System.Windows.Forms.TabPage();
             this.DiffieHellmanTab = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.CaesarStepUpDown = new System.Windows.Forms.NumericUpDown();
             this.CipherTabControl.SuspendLayout();
             this.CaesarTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CaesarStepUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // CipherTabControl
@@ -62,7 +63,7 @@
             this.CipherTabControl.Location = new System.Drawing.Point(-1, -1);
             this.CipherTabControl.Name = "CipherTabControl";
             this.CipherTabControl.SelectedIndex = 0;
-            this.CipherTabControl.Size = new System.Drawing.Size(785, 566);
+            this.CipherTabControl.Size = new System.Drawing.Size(789, 566);
             this.CipherTabControl.TabIndex = 0;
             // 
             // CaesarTab
@@ -72,7 +73,7 @@
             this.CaesarTab.Location = new System.Drawing.Point(4, 22);
             this.CaesarTab.Name = "CaesarTab";
             this.CaesarTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CaesarTab.Size = new System.Drawing.Size(777, 540);
+            this.CaesarTab.Size = new System.Drawing.Size(781, 540);
             this.CaesarTab.TabIndex = 0;
             this.CaesarTab.Text = "Шифр Цезаря";
             this.CaesarTab.UseVisualStyleBackColor = true;
@@ -89,64 +90,112 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.button2);
-            this.splitContainer1.Panel1.Controls.Add(this.button1);
-            this.splitContainer1.Panel1.Controls.Add(this.LeftCaesarTextBox);
+            this.splitContainer1.Panel1.Controls.Add(this.CaesarStepUpDown);
+            this.splitContainer1.Panel1.Controls.Add(this.CaesarStepLabel);
+            this.splitContainer1.Panel1.Controls.Add(this.CaesarProcessModeComboBox);
+            this.splitContainer1.Panel1.Controls.Add(this.CaesarBeforeProcessButton);
+            this.splitContainer1.Panel1.Controls.Add(this.CaesarPasteButton);
+            this.splitContainer1.Panel1.Controls.Add(this.CaesarBeforeProccesTextBox);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.button3);
-            this.splitContainer1.Panel2.Controls.Add(this.button4);
-            this.splitContainer1.Panel2.Controls.Add(this.RightCaesarTextBox);
-            this.splitContainer1.Size = new System.Drawing.Size(771, 534);
+            this.splitContainer1.Panel2.Controls.Add(this.SaveToFileButton);
+            this.splitContainer1.Panel2.Controls.Add(this.CaesarCopyButton);
+            this.splitContainer1.Panel2.Controls.Add(this.CaesarAfterProcessTextBox);
+            this.splitContainer1.Size = new System.Drawing.Size(775, 534);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 3;
             // 
-            // button2
+            // CaesarStepLabel
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(573, 199);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(195, 42);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Зашифровать";
-            this.button2.UseVisualStyleBackColor = true;
+            this.CaesarStepLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaesarStepLabel.AutoSize = true;
+            this.CaesarStepLabel.Location = new System.Drawing.Point(229, 201);
+            this.CaesarStepLabel.Name = "CaesarStepLabel";
+            this.CaesarStepLabel.Size = new System.Drawing.Size(27, 13);
+            this.CaesarStepLabel.TabIndex = 5;
+            this.CaesarStepLabel.Text = "Шаг";
             // 
-            // button1
+            // CaesarProcessModeComboBox
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(384, 199);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(183, 42);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Вставить из буфера обмена";
-            this.button1.UseVisualStyleBackColor = true;
+            this.CaesarProcessModeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaesarProcessModeComboBox.FormattingEnabled = true;
+            this.CaesarProcessModeComboBox.Items.AddRange(new object[] {
+            "Шифровка",
+            "Дешифровка"});
+            this.CaesarProcessModeComboBox.Location = new System.Drawing.Point(261, 220);
+            this.CaesarProcessModeComboBox.Name = "CaesarProcessModeComboBox";
+            this.CaesarProcessModeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.CaesarProcessModeComboBox.TabIndex = 3;
+            this.CaesarProcessModeComboBox.SelectedIndexChanged += new System.EventHandler(this.CaesarProcessModeComboBox_SelectedIndexChanged);
             // 
-            // LeftCaesarTextBox
+            // CaesarBeforeProcessButton
             // 
-            this.LeftCaesarTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.CaesarBeforeProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaesarBeforeProcessButton.Location = new System.Drawing.Point(577, 199);
+            this.CaesarBeforeProcessButton.Name = "CaesarBeforeProcessButton";
+            this.CaesarBeforeProcessButton.Size = new System.Drawing.Size(195, 42);
+            this.CaesarBeforeProcessButton.TabIndex = 2;
+            this.CaesarBeforeProcessButton.Text = "Зашифровать";
+            this.CaesarBeforeProcessButton.UseVisualStyleBackColor = true;
+            this.CaesarBeforeProcessButton.Click += new System.EventHandler(this.CaesarBeforeProcessButton_Click);
+            // 
+            // CaesarPasteButton
+            // 
+            this.CaesarPasteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaesarPasteButton.Location = new System.Drawing.Point(388, 199);
+            this.CaesarPasteButton.Name = "CaesarPasteButton";
+            this.CaesarPasteButton.Size = new System.Drawing.Size(183, 42);
+            this.CaesarPasteButton.TabIndex = 1;
+            this.CaesarPasteButton.Text = "Вставить из буфера обмена";
+            this.CaesarPasteButton.UseVisualStyleBackColor = true;
+            this.CaesarPasteButton.Click += new System.EventHandler(this.PasteButton_Click);
+            // 
+            // CaesarBeforeProccesTextBox
+            // 
+            this.CaesarBeforeProccesTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LeftCaesarTextBox.Location = new System.Drawing.Point(3, 0);
-            this.LeftCaesarTextBox.Multiline = true;
-            this.LeftCaesarTextBox.Name = "LeftCaesarTextBox";
-            this.LeftCaesarTextBox.Size = new System.Drawing.Size(765, 193);
-            this.LeftCaesarTextBox.TabIndex = 0;
+            this.CaesarBeforeProccesTextBox.Location = new System.Drawing.Point(3, 0);
+            this.CaesarBeforeProccesTextBox.Multiline = true;
+            this.CaesarBeforeProccesTextBox.Name = "CaesarBeforeProccesTextBox";
+            this.CaesarBeforeProccesTextBox.Size = new System.Drawing.Size(769, 193);
+            this.CaesarBeforeProccesTextBox.TabIndex = 0;
             // 
-            // RightCaesarTextBox
+            // SaveToFileButton
             // 
-            this.RightCaesarTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.SaveToFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveToFileButton.Enabled = false;
+            this.SaveToFileButton.Location = new System.Drawing.Point(577, 229);
+            this.SaveToFileButton.Name = "SaveToFileButton";
+            this.SaveToFileButton.Size = new System.Drawing.Size(195, 42);
+            this.SaveToFileButton.TabIndex = 4;
+            this.SaveToFileButton.Text = "Сохранить в файл";
+            this.SaveToFileButton.UseVisualStyleBackColor = true;
+            // 
+            // CaesarCopyButton
+            // 
+            this.CaesarCopyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaesarCopyButton.Enabled = false;
+            this.CaesarCopyButton.Location = new System.Drawing.Point(388, 229);
+            this.CaesarCopyButton.Name = "CaesarCopyButton";
+            this.CaesarCopyButton.Size = new System.Drawing.Size(183, 42);
+            this.CaesarCopyButton.TabIndex = 3;
+            this.CaesarCopyButton.Text = "Копировать в буфер обмена";
+            this.CaesarCopyButton.UseVisualStyleBackColor = true;
+            this.CaesarCopyButton.Click += new System.EventHandler(this.CaesarCopyButton_Click);
+            // 
+            // CaesarAfterProcessTextBox
+            // 
+            this.CaesarAfterProcessTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.RightCaesarTextBox.Location = new System.Drawing.Point(3, 0);
-            this.RightCaesarTextBox.Multiline = true;
-            this.RightCaesarTextBox.Name = "RightCaesarTextBox";
-            this.RightCaesarTextBox.ReadOnly = true;
-            this.RightCaesarTextBox.Size = new System.Drawing.Size(765, 223);
-            this.RightCaesarTextBox.TabIndex = 1;
+            this.CaesarAfterProcessTextBox.Location = new System.Drawing.Point(3, 0);
+            this.CaesarAfterProcessTextBox.Multiline = true;
+            this.CaesarAfterProcessTextBox.Name = "CaesarAfterProcessTextBox";
+            this.CaesarAfterProcessTextBox.ReadOnly = true;
+            this.CaesarAfterProcessTextBox.Size = new System.Drawing.Size(769, 223);
+            this.CaesarAfterProcessTextBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -176,57 +225,19 @@
             this.DiffieHellmanTab.Text = "Протокол Диффи-Хеллмана";
             this.DiffieHellmanTab.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // CaesarStepUpDown
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(573, 229);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(195, 42);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Расшифровать";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(384, 229);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(183, 42);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Копировать в буфер обмена";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Шифровка",
-            "Дешифровка"});
-            this.comboBox1.Location = new System.Drawing.Point(243, 211);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 3;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(144, 212);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(53, 20);
-            this.textBox1.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(156, 196);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Шаг";
+            this.CaesarStepUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaesarStepUpDown.Location = new System.Drawing.Point(261, 199);
+            this.CaesarStepUpDown.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.CaesarStepUpDown.Name = "CaesarStepUpDown";
+            this.CaesarStepUpDown.Size = new System.Drawing.Size(121, 20);
+            this.CaesarStepUpDown.TabIndex = 6;
+            this.CaesarStepUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // CipherForm
             // 
@@ -247,6 +258,7 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CaesarStepUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -258,16 +270,16 @@
         private System.Windows.Forms.TabPage VigenereTab;
         private System.Windows.Forms.TabPage DiffieHellmanTab;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox LeftCaesarTextBox;
-        private System.Windows.Forms.TextBox RightCaesarTextBox;
+        private System.Windows.Forms.Button CaesarBeforeProcessButton;
+        private System.Windows.Forms.Button CaesarPasteButton;
+        private System.Windows.Forms.TextBox CaesarBeforeProccesTextBox;
+        private System.Windows.Forms.TextBox CaesarAfterProcessTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button SaveToFileButton;
+        private System.Windows.Forms.Button CaesarCopyButton;
+        private System.Windows.Forms.ComboBox CaesarProcessModeComboBox;
+        private System.Windows.Forms.Label CaesarStepLabel;
+        private System.Windows.Forms.NumericUpDown CaesarStepUpDown;
     }
 }
 
