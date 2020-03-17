@@ -49,10 +49,9 @@
             this.VigenereBeforeProcessButton = new System.Windows.Forms.Button();
             this.VigenereBeforeProcessTextBox = new System.Windows.Forms.TextBox();
             this.VigenerePasteButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.VigenereAfterProcessTextBox = new System.Windows.Forms.TextBox();
             this.VigenereCopyButton = new System.Windows.Forms.Button();
-            this.VigenereSaveToFile = new System.Windows.Forms.Button();
+            this.VigenereSaveToFileButton = new System.Windows.Forms.Button();
             this.DiffieHellmanTab = new System.Windows.Forms.TabPage();
             this.CipherTabControl.SuspendLayout();
             this.CaesarTab.SuspendLayout();
@@ -269,10 +268,9 @@
             // 
             // VigenereSplitContainer.Panel2
             // 
-            this.VigenereSplitContainer.Panel2.Controls.Add(this.textBox1);
             this.VigenereSplitContainer.Panel2.Controls.Add(this.VigenereAfterProcessTextBox);
             this.VigenereSplitContainer.Panel2.Controls.Add(this.VigenereCopyButton);
-            this.VigenereSplitContainer.Panel2.Controls.Add(this.VigenereSaveToFile);
+            this.VigenereSplitContainer.Panel2.Controls.Add(this.VigenereSaveToFileButton);
             this.VigenereSplitContainer.Size = new System.Drawing.Size(775, 534);
             this.VigenereSplitContainer.SplitterDistance = 250;
             this.VigenereSplitContainer.TabIndex = 0;
@@ -341,18 +339,6 @@
             this.VigenerePasteButton.UseVisualStyleBackColor = true;
             this.VigenerePasteButton.Click += new System.EventHandler(this.VigenerePasteButton_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 0);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(769, 223);
-            this.textBox1.TabIndex = 7;
-            // 
             // VigenereAfterProcessTextBox
             // 
             this.VigenereAfterProcessTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -364,6 +350,7 @@
             this.VigenereAfterProcessTextBox.ReadOnly = true;
             this.VigenereAfterProcessTextBox.Size = new System.Drawing.Size(769, 223);
             this.VigenereAfterProcessTextBox.TabIndex = 7;
+            this.VigenereAfterProcessTextBox.TextChanged += new System.EventHandler(this.VigenereAfterProcessTextBox_TextChanged);
             // 
             // VigenereCopyButton
             // 
@@ -377,17 +364,17 @@
             this.VigenereCopyButton.UseVisualStyleBackColor = true;
             this.VigenereCopyButton.Click += new System.EventHandler(this.VigenereCopyButton_Click);
             // 
-            // VigenereSaveToFile
+            // VigenereSaveToFileButton
             // 
-            this.VigenereSaveToFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.VigenereSaveToFile.Enabled = false;
-            this.VigenereSaveToFile.Location = new System.Drawing.Point(577, 229);
-            this.VigenereSaveToFile.Name = "VigenereSaveToFile";
-            this.VigenereSaveToFile.Size = new System.Drawing.Size(195, 42);
-            this.VigenereSaveToFile.TabIndex = 10;
-            this.VigenereSaveToFile.Text = "Сохранить в файл";
-            this.VigenereSaveToFile.UseVisualStyleBackColor = true;
-            this.VigenereSaveToFile.Click += new System.EventHandler(this.VigenereSaveToFile_Click);
+            this.VigenereSaveToFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.VigenereSaveToFileButton.Enabled = false;
+            this.VigenereSaveToFileButton.Location = new System.Drawing.Point(577, 229);
+            this.VigenereSaveToFileButton.Name = "VigenereSaveToFileButton";
+            this.VigenereSaveToFileButton.Size = new System.Drawing.Size(195, 42);
+            this.VigenereSaveToFileButton.TabIndex = 10;
+            this.VigenereSaveToFileButton.Text = "Сохранить в файл";
+            this.VigenereSaveToFileButton.UseVisualStyleBackColor = true;
+            this.VigenereSaveToFileButton.Click += new System.EventHandler(this.VigenereSaveToFile_Click);
             // 
             // DiffieHellmanTab
             // 
@@ -453,8 +440,7 @@
         private System.Windows.Forms.Button VigenerePasteButton;
         private System.Windows.Forms.TextBox VigenereAfterProcessTextBox;
         private System.Windows.Forms.Button VigenereCopyButton;
-        private System.Windows.Forms.Button VigenereSaveToFile;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button VigenereSaveToFileButton;
         private System.Windows.Forms.TextBox VigenereKeyTextBox;
         private System.Windows.Forms.ComboBox VigenereProcessModeComboBox;
         private System.Windows.Forms.Label VigenereKeyLabel;

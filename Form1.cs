@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,8 +14,7 @@ namespace CipherDecipher
 {
     public partial class CipherForm : Form
     {
-        public const string RUS_ALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-        public const string ENG_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
         private bool CaesarIsToCipher = true;
         private bool VigenereIsToCipher = true;
 
@@ -57,14 +57,14 @@ namespace CipherDecipher
 
         private void CaesarBeforeProcessButton_Click(object sender, EventArgs e)
         {
-            if (CaesarBeforeProcessTextBox.Text != null)
+            if (this.CaesarBeforeProcessTextBox.Text != null)
             {
                 this.CaesarAfterProcessTextBox.Text = (this.CaesarIsToCipher)
-                    ? this.CaesarAfterProcessTextBox.Text = CiphersDeciphers.CaesarCipherDecipher(
+                    ? this.CaesarAfterProcessTextBox.Text = CiphersDeciphers.CaesarEncodeDecode(
                             Convert.ToInt32(CaesarStepUpDown.Value),
                             CaesarBeforeProcessTextBox.Text
                         )
-                    : this.CaesarAfterProcessTextBox.Text = CiphersDeciphers.CaesarCipherDecipher(
+                    : this.CaesarAfterProcessTextBox.Text = CiphersDeciphers.CaesarEncodeDecode(
                             -Convert.ToInt32(CaesarStepUpDown.Value),
                             CaesarBeforeProcessTextBox.Text
                         );
@@ -73,7 +73,7 @@ namespace CipherDecipher
 
         private void CaesarAfterProcessTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (CaesarAfterProcessTextBox.Text.Length > 0)
+            if (this.CaesarAfterProcessTextBox.Text.Length > 0)
             {
                 this.CaesarCopyButton.Enabled = true;
                 this.CaesarSaveToFileButton.Enabled = true;
@@ -93,26 +93,21 @@ namespace CipherDecipher
             sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             if (sfd.ShowDialog() == DialogResult.OK)
-            {
                 File.WriteAllText(sfd.FileName, this.CaesarAfterProcessTextBox.Text);
-            }
+
             sfd.Dispose();
         }
 
         private void CaesarTab_SizeChanged(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
-            {
                 this.CaesarSplitContainer.SplitterDistance = ClientSize.Height / 2;
-            }
         }
 
         private void VigenereTab_SizeChanged(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
-            {
                 this.VigenereSplitContainer.SplitterDistance = ClientSize.Height / 2;
-            }
         }
 
         private void VigenerePasteButton_Click(object sender, EventArgs e)
@@ -154,15 +149,46 @@ namespace CipherDecipher
             sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             if (sfd.ShowDialog() == DialogResult.OK)
-            {
                 File.WriteAllText(sfd.FileName, this.VigenereAfterProcessTextBox.Text);
-            }
+
             sfd.Dispose();
         }
 
         private void VigenereBeforeProcessButton_Click(object sender, EventArgs e)
         {
-            //TODO VigenereCipher
+            if (this.VigenereKeyTextBox.Text.Length > 0)
+            {
+                string temp = Regex.Replace(this.VigenereKeyTextBox.Text, " ", string.Empty);
+
+                if (this.VigenereIsToCipher)
+                    this.VigenereAfterProcessTextBox.Text = CiphersDeciphers.VigenereEncode(VigenereBeforeProcessTextBox.Text, temp);
+                else
+                    this.VigenereAfterProcessTextBox.Text = CiphersDeciphers.VigenereDecode(VigenereBeforeProcessTextBox.Text, temp);
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Введите ключ", 
+                    "Сообщение", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error
+                );
+            }
+            
+        }
+
+        private void VigenereAfterProcessTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (this.VigenereAfterProcessTextBox.Text.Length > 0)
+            {
+                this.VigenereCopyButton.Enabled = true;
+                this.VigenereSaveToFileButton.Enabled = true;
+            }
+            else
+            {
+                this.VigenereCopyButton.Enabled = false;
+                this.VigenereSaveToFileButton.Enabled = false;
+            }
         }
     }
 }
