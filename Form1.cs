@@ -14,24 +14,17 @@ namespace CipherDecipher
 {
     public partial class CipherForm : Form
     {
-        
+
         private bool CaesarIsToCipher = true;
         private bool VigenereIsToCipher = true;
+
+        public static Dictionary<int, int> DiffieOpenKeysDictionary = new Dictionary<int, int>();
 
         public CipherForm()
         {
             InitializeComponent();
             this.CaesarProcessModeComboBox.SelectedIndex = 0;
             this.VigenereProcessModeComboBox.SelectedIndex = 0;
-        }
-
-        private void CipherForm_SizeChanged(object sender, EventArgs e)
-        {
-            if (this.WindowState != FormWindowState.Minimized)
-            {
-                this.CaesarSplitContainer.SplitterDistance = ClientSize.Height / 2;
-                this.VigenereSplitContainer.SplitterDistance = ClientSize.Height / 2;
-            }
         }
 
         private void CaesarCopyButton_Click(object sender, EventArgs e)
@@ -87,10 +80,12 @@ namespace CipherDecipher
 
         private void CaesarSaveToFileButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.FileName = "untitled";
-            sfd.Filter = "Text (*.txt)|*.txt";
-            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                FileName = "untitled",
+                Filter = "Text (*.txt)|*.txt",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+            };
 
             if (sfd.ShowDialog() == DialogResult.OK)
                 File.WriteAllText(sfd.FileName, this.CaesarAfterProcessTextBox.Text);
@@ -143,10 +138,12 @@ namespace CipherDecipher
 
         private void VigenereSaveToFile_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.FileName = "untitled";
-            sfd.Filter = "Text (*.txt)|*.txt";
-            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                FileName = "untitled",
+                Filter = "Text (*.txt)|*.txt",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+            };
 
             if (sfd.ShowDialog() == DialogResult.OK)
                 File.WriteAllText(sfd.FileName, this.VigenereAfterProcessTextBox.Text);
@@ -188,6 +185,23 @@ namespace CipherDecipher
             {
                 this.VigenereCopyButton.Enabled = false;
                 this.VigenereSaveToFileButton.Enabled = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bool result = int.TryParse(textBox1.Text, out int number);
+
+            if (result && number > 1 && number < 1000)
+                CiphersDeciphers.SetDictionaryOfPublicKeys(number);
+            else
+            {
+                MessageBox.Show(
+                    "Введите корректное число от 1 до 1000",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
     }

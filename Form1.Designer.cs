@@ -53,6 +53,9 @@
             this.VigenereCopyButton = new System.Windows.Forms.Button();
             this.VigenereSaveToFileButton = new System.Windows.Forms.Button();
             this.DiffieHellmanTab = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.CipherTabControl.SuspendLayout();
             this.CaesarTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CaesarSplitContainer)).BeginInit();
@@ -65,6 +68,7 @@
             this.VigenereSplitContainer.Panel1.SuspendLayout();
             this.VigenereSplitContainer.Panel2.SuspendLayout();
             this.VigenereSplitContainer.SuspendLayout();
+            this.DiffieHellmanTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // CipherTabControl
@@ -378,6 +382,9 @@
             // 
             // DiffieHellmanTab
             // 
+            this.DiffieHellmanTab.Controls.Add(this.button1);
+            this.DiffieHellmanTab.Controls.Add(this.textBox2);
+            this.DiffieHellmanTab.Controls.Add(this.textBox1);
             this.DiffieHellmanTab.Location = new System.Drawing.Point(4, 22);
             this.DiffieHellmanTab.Name = "DiffieHellmanTab";
             this.DiffieHellmanTab.Padding = new System.Windows.Forms.Padding(3);
@@ -385,6 +392,30 @@
             this.DiffieHellmanTab.TabIndex = 2;
             this.DiffieHellmanTab.Text = "Протокол Диффи-Хеллмана";
             this.DiffieHellmanTab.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(9, 6);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(9, 32);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(9, 58);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 25);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // CipherForm
             // 
@@ -394,8 +425,7 @@
             this.Controls.Add(this.CipherTabControl);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "CipherForm";
-            this.Text = "Form1";
-            this.SizeChanged += new System.EventHandler(this.CipherForm_SizeChanged);
+            this.Text = "CipherDecipher";
             this.CipherTabControl.ResumeLayout(false);
             this.CaesarTab.ResumeLayout(false);
             this.CaesarTab.PerformLayout();
@@ -413,6 +443,8 @@
             this.VigenereSplitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VigenereSplitContainer)).EndInit();
             this.VigenereSplitContainer.ResumeLayout(false);
+            this.DiffieHellmanTab.ResumeLayout(false);
+            this.DiffieHellmanTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -444,6 +476,9 @@
         private System.Windows.Forms.TextBox VigenereKeyTextBox;
         private System.Windows.Forms.ComboBox VigenereProcessModeComboBox;
         private System.Windows.Forms.Label VigenereKeyLabel;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
