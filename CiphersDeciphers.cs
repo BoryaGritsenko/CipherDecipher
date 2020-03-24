@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Numerics;
 
 namespace CipherDecipher
 {
@@ -39,12 +40,10 @@ namespace CipherDecipher
             return result;
         }
 
-        public static string VigenereEncode(string text, string key)
+        public static string VigenereEncodeDecode(string text, string key, bool VigenereIsToCipher)
         {
             string result = "";
-            int keyword_index = 0;
-
-
+            int keywordIndex = 0;
 
             foreach (char symbol in text)
             {
@@ -59,68 +58,25 @@ namespace CipherDecipher
                         ? Constants.ENG_ALPHABET
                         : Constants.RUS_ALPHABET;
 
-                    int keywordKey = (Constants.ENG_ALPHABET.IndexOf(key[keyword_index]) >= 0)
-                        ? Constants.ENG_ALPHABET.IndexOf(key[keyword_index])
-                        : Constants.RUS_ALPHABET.IndexOf(key[keyword_index]);
+                    int p;
 
-                    int c = (alphabet.IndexOf(symbol) + keywordKey) % alphabet.Length;
-                    Console.WriteLine(alphabet.IndexOf(symbol));
-                    Console.WriteLine(alphabet.IndexOf(key[keyword_index]));
-                    Console.WriteLine(alphabet.Length);
-
-                    if (alphabet.IndexOf(symbol) < 0)
-                        result += symbol;
+                    if (VigenereIsToCipher)
+                        p = (alphabet.IndexOf(symbol) + alphabet.IndexOf(key[keywordIndex])) % alphabet.Length;
                     else
-                        result += alphabet[c];
+                        p = (alphabet.IndexOf(symbol) + alphabet.Length - alphabet.IndexOf(key[keywordIndex])) % alphabet.Length;
 
-                    keyword_index++;
+                    result += alphabet[p];
 
-                    if ((keyword_index + 1) == key.Length)
-                        keyword_index = 0;
+                    keywordIndex++;
+
+                    if ((keywordIndex + 1) == key.Length)
+                        keywordIndex = 0;
                 }
             }
             return result;
         }
 
-        public static string VigenereDecode(string text, string key)
-        {
-            string result = "";
-            int keyword_index = 0;
-
-            foreach (char symbol in text)
-            {
-                bool isEnglish = Constants.ENG_ALPHABET.IndexOf(symbol) >= 0;
-                bool isRussian = Constants.RUS_ALPHABET.IndexOf(symbol) >= 0;
-
-                if (!isEnglish && !isRussian)
-                    result += symbol.ToString();
-                else
-                {
-                    string alphabet = (isEnglish)
-                        ? Constants.ENG_ALPHABET
-                        : Constants.RUS_ALPHABET;
-
-                    int keywordKey = (Constants.ENG_ALPHABET.IndexOf(key[keyword_index]) >= 0)
-                        ? Constants.ENG_ALPHABET.IndexOf(key[keyword_index])
-                        : Constants.RUS_ALPHABET.IndexOf(key[keyword_index]);
-
-                    int p = (alphabet.IndexOf(symbol) + alphabet.Length - keywordKey) % alphabet.Length;
-
-                    if (alphabet.IndexOf(symbol) < 0)
-                        result += symbol;
-                    else
-                        result += alphabet[p];
-
-                    keyword_index++;
-
-                    if ((keyword_index + 1) == key.Length)
-                        keyword_index = 0;
-                }
-            }
-            return result;
-        }
-
-        public static void SetDictionaryOfPublicKeys(int number)
+        public static KeyValuePair<int, int>? SetDictionaryOfPublicKeys(int number)
         {
             if(CipherForm.DiffieOpenKeysDictionary.Count > 0)
                 CipherForm.DiffieOpenKeysDictionary.Clear();
@@ -128,111 +84,77 @@ namespace CipherDecipher
             CipherForm.DiffieOpenKeysDictionary.Add(2, 1);
             CipherForm.DiffieOpenKeysDictionary.Add(3, 2);
 
-            int buff = -1;
-            for (int i = 7; i <= number; i++)
+            int buff;
+            for (int i = 5; i <= number; i++)
             {
-                if(isPrime(i))
+                if(IsPrime(i))
                 {
-                    //GetDivid(i);
                     buff = GetPrimitiveRoot(i);
                     if (buff != -1)
                         CipherForm.DiffieOpenKeysDictionary.Add(i, buff);  
                 }
             }
 
-            foreach (KeyValuePair<int, int> kvp in CipherForm.DiffieOpenKeysDictionary)
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            return GetRandomPublicKey();
         }
 
-        private static bool isPrime(int number)
+        public static bool IsPrime(int number)
         {
-            bool result = true;
-
             for (int i = 2; i < number; i++)
                 if (number % i == 0) return false;
 
-            return result;
+            return true;
         }
         
-        private static int GetPrimitiveRoot(int p)
+        private static int GetPrimitiveRoot(int prime)
         {
-            double buff;
-            var set = new HashSet<double>();
-            for (int i = 2; i < p; i++)
-            {
-                for (int j = 1; j < p; j++)
-                {
-                    buff = Math.Pow(i, j) % p;
-                    if (buff != 0)
-                    {
-                        if (set.Contains(buff))
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            set.Add(buff);
-                        }
-                    }
-                }
-                if (set.Count == p - 1)
-                    return i;
-                set.Clear();
-            }
+            for (int gen = 2; gen < prime; gen++)
+                if (IsPrimitiveRoot(gen, prime))
+                    return gen;
 
             return -1;
         }
 
-        /*private static void GetDivid(int p)
+        public static bool IsPrimitiveRoot(int gen, int prime)
         {
-            var divid = new List<int>();
-            var minusP = p - 1;
-            for (int i = 2; i <= minusP; i++)
-            {
-                var relat = minusP % i;
-                if (relat == 0 && i != minusP)
-                    divid.Add(i);
-            }
-            CalcG(divid, p, minusP);
-        }*/
+            double buff;
+            var set = new HashSet<double>();
 
-        /*private static void CalcG(List<int> divid, int p, int minusP)
+            for (int j = 1; j < prime; j++)
+            {
+                buff = Math.Pow(gen, j) % prime;
+
+                if (buff != 0 && set.Contains(buff))
+                    break;
+                else
+                    set.Add(buff);
+            }
+            if (set.Count == prime - 1)
+                return true;
+            
+            return false;
+        }
+
+        private static KeyValuePair<int, int>? GetRandomPublicKey()
         {
-            List<int> g = new List<int>();
-            int plus = 0;
-            if (p == 2)
-                g.Add(2);
-            if (p == 3)
-                g.Add(2);
-            else
-            {
-                for (int i = 2; i < p; i++)
-                {
-                    plus = 0;
+            int count = CipherForm.DiffieOpenKeysDictionary.Count;
 
-                    for (int l = 0; l < divid.Count; l++)
-                    {
-                        var degree = Math.Pow(i, divid[l]);
-                        var minusDegree = degree - 1;
-                        var divDegree = minusDegree % p;
+            if (count > 0)
+                return CipherForm.DiffieOpenKeysDictionary.ElementAt(new Random().Next(0, count));
 
-                        if (divDegree != 0)
-                            plus++;
-                        else if (divDegree == 0)
-                            plus = 0;
-                        if (plus == divid.Count)
-                        {
-                            g.Add(i);
-                            plus = 0;
-                        }
-                    }
-                }
-                
-                foreach (int a in g)
-                {
-                    Console.WriteLine(a);
-                }
-            }
-        }*/
+            MessageBox.Show(
+                "Сначала введите число в поле",
+                "Ошибка",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+
+            return null;
+        }
+
+        public static BigInteger DiffieHellmanCalcKey(int key, BigInteger gen, BigInteger prime)
+        {
+            return BigInteger.Remainder(BigInteger.Pow(gen, key), prime);
+        }
     }
 }

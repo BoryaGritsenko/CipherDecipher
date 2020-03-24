@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace CipherDecipher
             InitializeComponent();
             this.CaesarProcessModeComboBox.SelectedIndex = 0;
             this.VigenereProcessModeComboBox.SelectedIndex = 0;
+
+            this.DiffieHellmanKeySplitContainer.SplitterDistance = this.DiffieHellmanCaptionLabel.Width + 50;
         }
 
         private void CaesarCopyButton_Click(object sender, EventArgs e)
@@ -54,12 +57,12 @@ namespace CipherDecipher
             {
                 this.CaesarAfterProcessTextBox.Text = (this.CaesarIsToCipher)
                     ? this.CaesarAfterProcessTextBox.Text = CiphersDeciphers.CaesarEncodeDecode(
-                            Convert.ToInt32(CaesarStepUpDown.Value),
-                            CaesarBeforeProcessTextBox.Text
+                            Convert.ToInt32(this.CaesarStepUpDown.Value),
+                            this.CaesarBeforeProcessTextBox.Text
                         )
                     : this.CaesarAfterProcessTextBox.Text = CiphersDeciphers.CaesarEncodeDecode(
-                            -Convert.ToInt32(CaesarStepUpDown.Value),
-                            CaesarBeforeProcessTextBox.Text
+                            -Convert.ToInt32(this.CaesarStepUpDown.Value),
+                            this.CaesarBeforeProcessTextBox.Text
                         );
             }
         }
@@ -103,6 +106,12 @@ namespace CipherDecipher
         {
             if (this.WindowState != FormWindowState.Minimized)
                 this.VigenereSplitContainer.SplitterDistance = ClientSize.Height / 2;
+        }
+
+        private void DiffieHellmanTab_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState != FormWindowState.Minimized)
+                this.DiffieHellmanKeySplitContainer.SplitterDistance = this.DiffieHellmanCaptionLabel.Width + 50;
         }
 
         private void VigenerePasteButton_Click(object sender, EventArgs e)
@@ -157,10 +166,12 @@ namespace CipherDecipher
             {
                 string temp = Regex.Replace(this.VigenereKeyTextBox.Text, " ", string.Empty);
 
-                if (this.VigenereIsToCipher)
-                    this.VigenereAfterProcessTextBox.Text = CiphersDeciphers.VigenereEncode(VigenereBeforeProcessTextBox.Text, temp);
-                else
-                    this.VigenereAfterProcessTextBox.Text = CiphersDeciphers.VigenereDecode(VigenereBeforeProcessTextBox.Text, temp);
+                
+                this.VigenereAfterProcessTextBox.Text = CiphersDeciphers.VigenereEncodeDecode(
+                    this.VigenereBeforeProcessTextBox.Text,
+                    temp,
+                    this.VigenereIsToCipher
+                );
             }
             else
             {
@@ -188,20 +199,84 @@ namespace CipherDecipher
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void DiffieHellmanButton_Click(object sender, EventArgs e)
         {
-            bool result = int.TryParse(textBox1.Text, out int number);
+            int number = Convert.ToInt32(this.DiffieHellmanInsertUpDown.Value);
 
-            if (result && number > 1 && number < 1000)
-                CiphersDeciphers.SetDictionaryOfPublicKeys(number);
+            if (number > 2 && number <= 2000)
+            {
+                KeyValuePair<int, int>? buff = CiphersDeciphers.SetDictionaryOfPublicKeys(number);
+
+                if (buff != null)
+                {
+                    this.DiffieHellmanPrimeTextBox.Text = buff.Value.Key.ToString();
+                    this.DiffieHellmanGeneratorTextBox.Text = buff.Value.Value.ToString();
+                }
+            }
             else
             {
                 MessageBox.Show(
-                    "Введите корректное число от 1 до 1000",
+                    "Введите корректное число от 3 до 1000",
                     "Ошибка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        { 
+            bool isP = int.TryParse(this.DiffieHellmanPrimeTextBox.Text, out int prime);
+            bool isG = int.TryParse(this.DiffieHellmanGeneratorTextBox.Text, out int gen);
+            //if input is number
+
+            if (isP && isG && CiphersDeciphers.IsPrime(prime) && CiphersDeciphers.IsPrimitiveRoot(gen, prime))
+                this.DiffieHellmanResultLabel.Text = $"{prime},{gen}";
+            else
+                MessageBox.Show(
+                    "Ключ введён неверно",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+        }
+
+        private void DiffieHellmanCollapseKeyButton_Click(object sender, EventArgs e)
+        {
+            this.DiffieHellmanKeySplitContainer.Panel1Collapsed = !this.DiffieHellmanKeySplitContainer.Panel1Collapsed;
+
+            this.DiffieHellmanCollapseKeyButton.Text = (this.DiffieHellmanKeySplitContainer.Panel1Collapsed)
+                ? "→→→"  // To open
+                : "←←←"; // To close
+        }
+
+        private void DiffieHellmanCalcOwnKeyButton_Click(object sender, EventArgs e)
+        {
+            if (this.DiffieHellmanResultLabel.Text.Length > 0)
+            {
+                string[] result = this.DiffieHellmanResultLabel.Text.Split(',');
+
+                int prime = Convert.ToInt32(result[0]);
+                int gen = Convert.ToInt32(result[1]);
+                var key = Convert.ToInt16(this.DiffieHellmanOwnKeyUpDown.Value);
+                System.Console.WriteLine($"{gen}, {prime}, {key}");
+
+                this.DiffieHellmanOwnKeyResultLabel.Text = CiphersDeciphers.DiffieHellmanCalcKey(key, gen, prime).ToString();
+            }
+        }
+
+        private void DiffieHellmanCalcPartnerKeyButton_Click(object sender, EventArgs e)
+        {
+            if (this.DiffieHellmanResultLabel.Text.Length > 0)
+            {
+                string[] result = this.DiffieHellmanResultLabel.Text.Split(',');
+
+                var prime = BigInteger.Parse(result[0]);
+                var gen = BigInteger.Parse(result[1]);
+                var key = Convert.ToInt16(this.DiffieHellmanPartnerKeyUpDown.Value);
+                System.Console.WriteLine($"{gen}, {prime}, {key}");
+
+                this.DiffieHellmanPartnerKeyResultUpDown.Value = Convert.ToDecimal(CiphersDeciphers.DiffieHellmanCalcKey(key, gen, prime).ToString());
             }
         }
     }
