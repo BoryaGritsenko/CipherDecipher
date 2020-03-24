@@ -279,5 +279,33 @@ namespace CipherDecipher
                 this.DiffieHellmanPartnerKeyResultUpDown.Value = Convert.ToDecimal(CiphersDeciphers.DiffieHellmanCalcKey(key, gen, prime).ToString());
             }
         }
+
+        private void DiffieHellmanGetOwnPrivateKeyButton_Click(object sender, EventArgs e)
+        {
+            if (DiffieHellmanOwnKeyUpDown.Value > 0 && DiffieHellmanPartnerKeyUpDown.Value > 0)
+            {
+                string[] result = this.DiffieHellmanResultLabel.Text.Split(',');
+
+                var prime = BigInteger.Parse(result[0]);
+                var gen = BigInteger.Parse(DiffieHellmanPartnerKeyResultUpDown.Value.ToString());
+                var key = Convert.ToInt16(DiffieHellmanOwnKeyUpDown.Value);
+
+                DiffieHellmanGetOwnPrivateKeyLabel.Text = CiphersDeciphers.DiffieHellmanCalcKey(key, gen, prime).ToString();
+            }
+        }
+
+        private void DiffieHellmanGetPartnerPrivateKeyButton_Click(object sender, EventArgs e)
+        {
+            if (DiffieHellmanPartnerKeyUpDown.Value > 0 && DiffieHellmanOwnKeyResultLabel.Text != String.Empty)
+            {
+                string[] result = this.DiffieHellmanResultLabel.Text.Split(',');
+
+                var prime = BigInteger.Parse(result[0]);
+                var gen = BigInteger.Parse(DiffieHellmanOwnKeyResultLabel.Text);
+                var key = Convert.ToInt16(DiffieHellmanPartnerKeyUpDown.Value);
+
+                DiffieHellmanGetPartnerPrivateKeyLabel.Text = CiphersDeciphers.DiffieHellmanCalcKey(key, gen, prime).ToString();
+            }
+        }
     }
 }

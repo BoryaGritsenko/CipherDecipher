@@ -56,6 +56,10 @@
             this.DiffieHellmanKeySplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.DiffieHellmanGetPartnerPrivateKeyLabel = new System.Windows.Forms.Label();
+            this.DiffieHellmanGetOwnPrivateKeyLabel = new System.Windows.Forms.Label();
+            this.DiffieHellmanGetPartnerPrivateKeyButton = new System.Windows.Forms.Button();
+            this.DiffieHellmanGetOwnPrivateKeyButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.DiffieHellmanCaptionLabel = new System.Windows.Forms.Label();
             this.DiffieHellmanInsertUpDown = new System.Windows.Forms.NumericUpDown();
@@ -98,6 +102,7 @@
             this.DiffieHellmanKeySplitContainer.Panel2.SuspendLayout();
             this.DiffieHellmanKeySplitContainer.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanInsertUpDown)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -459,12 +464,54 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Location = new System.Drawing.Point(6, 453);
+            this.groupBox3.Controls.Add(this.DiffieHellmanGetPartnerPrivateKeyLabel);
+            this.groupBox3.Controls.Add(this.DiffieHellmanGetOwnPrivateKeyLabel);
+            this.groupBox3.Controls.Add(this.DiffieHellmanGetPartnerPrivateKeyButton);
+            this.groupBox3.Controls.Add(this.DiffieHellmanGetOwnPrivateKeyButton);
+            this.groupBox3.Location = new System.Drawing.Point(6, 406);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(183, 111);
             this.groupBox3.TabIndex = 33;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Сравнение закрытых ключей";
+            // 
+            // DiffieHellmanGetPartnerPrivateKeyLabel
+            // 
+            this.DiffieHellmanGetPartnerPrivateKeyLabel.AutoSize = true;
+            this.DiffieHellmanGetPartnerPrivateKeyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DiffieHellmanGetPartnerPrivateKeyLabel.Location = new System.Drawing.Point(123, 42);
+            this.DiffieHellmanGetPartnerPrivateKeyLabel.Name = "DiffieHellmanGetPartnerPrivateKeyLabel";
+            this.DiffieHellmanGetPartnerPrivateKeyLabel.Size = new System.Drawing.Size(0, 18);
+            this.DiffieHellmanGetPartnerPrivateKeyLabel.TabIndex = 3;
+            // 
+            // DiffieHellmanGetOwnPrivateKeyLabel
+            // 
+            this.DiffieHellmanGetOwnPrivateKeyLabel.AutoSize = true;
+            this.DiffieHellmanGetOwnPrivateKeyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DiffieHellmanGetOwnPrivateKeyLabel.Location = new System.Drawing.Point(45, 42);
+            this.DiffieHellmanGetOwnPrivateKeyLabel.Name = "DiffieHellmanGetOwnPrivateKeyLabel";
+            this.DiffieHellmanGetOwnPrivateKeyLabel.Size = new System.Drawing.Size(0, 18);
+            this.DiffieHellmanGetOwnPrivateKeyLabel.TabIndex = 2;
+            // 
+            // DiffieHellmanGetPartnerPrivateKeyButton
+            // 
+            this.DiffieHellmanGetPartnerPrivateKeyButton.Location = new System.Drawing.Point(90, 72);
+            this.DiffieHellmanGetPartnerPrivateKeyButton.Name = "DiffieHellmanGetPartnerPrivateKeyButton";
+            this.DiffieHellmanGetPartnerPrivateKeyButton.Size = new System.Drawing.Size(75, 23);
+            this.DiffieHellmanGetPartnerPrivateKeyButton.TabIndex = 1;
+            this.DiffieHellmanGetPartnerPrivateKeyButton.Text = "Получить";
+            this.DiffieHellmanGetPartnerPrivateKeyButton.UseVisualStyleBackColor = true;
+            this.DiffieHellmanGetPartnerPrivateKeyButton.Click += new System.EventHandler(this.DiffieHellmanGetPartnerPrivateKeyButton_Click);
+            // 
+            // DiffieHellmanGetOwnPrivateKeyButton
+            // 
+            this.DiffieHellmanGetOwnPrivateKeyButton.Location = new System.Drawing.Point(9, 72);
+            this.DiffieHellmanGetOwnPrivateKeyButton.Name = "DiffieHellmanGetOwnPrivateKeyButton";
+            this.DiffieHellmanGetOwnPrivateKeyButton.Size = new System.Drawing.Size(75, 23);
+            this.DiffieHellmanGetOwnPrivateKeyButton.TabIndex = 0;
+            this.DiffieHellmanGetOwnPrivateKeyButton.Text = "Получить";
+            this.DiffieHellmanGetOwnPrivateKeyButton.UseVisualStyleBackColor = true;
+            this.DiffieHellmanGetOwnPrivateKeyButton.Click += new System.EventHandler(this.DiffieHellmanGetOwnPrivateKeyButton_Click);
             // 
             // groupBox1
             // 
@@ -549,7 +596,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(92, 90);
+            this.label4.Location = new System.Drawing.Point(104, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 20;
@@ -566,7 +613,7 @@
             // 
             // DiffieHellmanGeneratorTextBox
             // 
-            this.DiffieHellmanGeneratorTextBox.Location = new System.Drawing.Point(95, 106);
+            this.DiffieHellmanGeneratorTextBox.Location = new System.Drawing.Point(107, 106);
             this.DiffieHellmanGeneratorTextBox.Name = "DiffieHellmanGeneratorTextBox";
             this.DiffieHellmanGeneratorTextBox.Size = new System.Drawing.Size(43, 20);
             this.DiffieHellmanGeneratorTextBox.TabIndex = 18;
@@ -574,7 +621,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 90);
+            this.label3.Location = new System.Drawing.Point(12, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 16;
@@ -592,7 +639,7 @@
             // 
             // DiffieHellmanPrimeTextBox
             // 
-            this.DiffieHellmanPrimeTextBox.Location = new System.Drawing.Point(25, 106);
+            this.DiffieHellmanPrimeTextBox.Location = new System.Drawing.Point(29, 106);
             this.DiffieHellmanPrimeTextBox.Name = "DiffieHellmanPrimeTextBox";
             this.DiffieHellmanPrimeTextBox.Size = new System.Drawing.Size(42, 20);
             this.DiffieHellmanPrimeTextBox.TabIndex = 17;
@@ -611,7 +658,7 @@
             this.groupBox2.Controls.Add(this.DiffieHellmanPartnerKeyUpDown);
             this.groupBox2.Location = new System.Drawing.Point(6, 210);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(183, 237);
+            this.groupBox2.Size = new System.Drawing.Size(183, 190);
             this.groupBox2.TabIndex = 34;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Закрытый ключ";
@@ -624,19 +671,9 @@
             0,
             0,
             0});
-            this.DiffieHellmanPartnerKeyResultUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.DiffieHellmanPartnerKeyResultUpDown.Name = "DiffieHellmanPartnerKeyResultUpDown";
             this.DiffieHellmanPartnerKeyResultUpDown.Size = new System.Drawing.Size(59, 20);
             this.DiffieHellmanPartnerKeyResultUpDown.TabIndex = 33;
-            this.DiffieHellmanPartnerKeyResultUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // label5
             // 
@@ -692,19 +729,9 @@
             0,
             0,
             0});
-            this.DiffieHellmanOwnKeyUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.DiffieHellmanOwnKeyUpDown.Name = "DiffieHellmanOwnKeyUpDown";
             this.DiffieHellmanOwnKeyUpDown.Size = new System.Drawing.Size(59, 20);
             this.DiffieHellmanOwnKeyUpDown.TabIndex = 23;
-            this.DiffieHellmanOwnKeyUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // DiffieHellmanOwnKeyResultLabel
             // 
@@ -732,19 +759,9 @@
             0,
             0,
             0});
-            this.DiffieHellmanPartnerKeyUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.DiffieHellmanPartnerKeyUpDown.Name = "DiffieHellmanPartnerKeyUpDown";
             this.DiffieHellmanPartnerKeyUpDown.Size = new System.Drawing.Size(59, 20);
             this.DiffieHellmanPartnerKeyUpDown.TabIndex = 24;
-            this.DiffieHellmanPartnerKeyUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // DiffieHellmanCollapseKeyButton
             // 
@@ -793,6 +810,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanKeySplitContainer)).EndInit();
             this.DiffieHellmanKeySplitContainer.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanInsertUpDown)).EndInit();
@@ -859,6 +878,10 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.NumericUpDown DiffieHellmanPartnerKeyResultUpDown;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button DiffieHellmanGetPartnerPrivateKeyButton;
+        private System.Windows.Forms.Button DiffieHellmanGetOwnPrivateKeyButton;
+        private System.Windows.Forms.Label DiffieHellmanGetPartnerPrivateKeyLabel;
+        private System.Windows.Forms.Label DiffieHellmanGetOwnPrivateKeyLabel;
     }
 }
 
