@@ -34,7 +34,7 @@
             this.CaesarStepUpDown = new System.Windows.Forms.NumericUpDown();
             this.CaesarStepLabel = new System.Windows.Forms.Label();
             this.CaesarProcessModeComboBox = new System.Windows.Forms.ComboBox();
-            this.CaesarBeforeProcessButton = new System.Windows.Forms.Button();
+            this.CaesarProcessButton = new System.Windows.Forms.Button();
             this.CaesarPasteButton = new System.Windows.Forms.Button();
             this.CaesarBeforeProcessTextBox = new System.Windows.Forms.TextBox();
             this.CaesarSaveToFileButton = new System.Windows.Forms.Button();
@@ -46,7 +46,7 @@
             this.VigenereKeyLabel = new System.Windows.Forms.Label();
             this.VigenereKeyTextBox = new System.Windows.Forms.TextBox();
             this.VigenereProcessModeComboBox = new System.Windows.Forms.ComboBox();
-            this.VigenereBeforeProcessButton = new System.Windows.Forms.Button();
+            this.VigenereProcessButton = new System.Windows.Forms.Button();
             this.VigenereBeforeProcessTextBox = new System.Windows.Forms.TextBox();
             this.VigenerePasteButton = new System.Windows.Forms.Button();
             this.VigenereAfterProcessTextBox = new System.Windows.Forms.TextBox();
@@ -61,6 +61,8 @@
             this.DiffieHellmanGetPartnerPrivateKeyButton = new System.Windows.Forms.Button();
             this.DiffieHellmanGetOwnPrivateKeyButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.DiffieHellmanGeneratorUpDown = new System.Windows.Forms.NumericUpDown();
+            this.DiffieHellmanPrimeUpDown = new System.Windows.Forms.NumericUpDown();
             this.DiffieHellmanCaptionLabel = new System.Windows.Forms.Label();
             this.DiffieHellmanInsertUpDown = new System.Windows.Forms.NumericUpDown();
             this.DiffieHellmanButton = new System.Windows.Forms.Button();
@@ -68,10 +70,8 @@
             this.DiffieHellmanResultLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.DiffieHellmanGeneratorTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.DiffieHellmanPrimeTextBox = new System.Windows.Forms.TextBox();
+            this.DiffieHellmanSendOpenKeyButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.DiffieHellmanPartnerKeyResultUpDown = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -83,6 +83,17 @@
             this.DiffieHellmanOwnKeyResultLabel = new System.Windows.Forms.Label();
             this.DiffieHellmanCalcOwnKeyButton = new System.Windows.Forms.Button();
             this.DiffieHellmanPartnerKeyUpDown = new System.Windows.Forms.NumericUpDown();
+            this.DiffieHellmanEncodeSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.label9 = new System.Windows.Forms.Label();
+            this.DiffieHellmanKeyTextBox = new System.Windows.Forms.TextBox();
+            this.DiffieHellmanPasteFromFileButton = new System.Windows.Forms.Button();
+            this.DiffieHellmanPasteButton = new System.Windows.Forms.Button();
+            this.DiffieHellmanProcessModeComboBox = new System.Windows.Forms.ComboBox();
+            this.DiffieHellmanProcessButton = new System.Windows.Forms.Button();
+            this.DiffieHellmanBeforeProcessTextBox = new System.Windows.Forms.TextBox();
+            this.DiffieHellmanCopyButton = new System.Windows.Forms.Button();
+            this.DiffieHellmanSaveToFileButton = new System.Windows.Forms.Button();
+            this.DiffieHellmanAfterProcessTextBox = new System.Windows.Forms.TextBox();
             this.DiffieHellmanCollapseKeyButton = new System.Windows.Forms.Button();
             this.CipherTabControl.SuspendLayout();
             this.CaesarTab.SuspendLayout();
@@ -104,11 +115,17 @@
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanGeneratorUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanPrimeUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanInsertUpDown)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanPartnerKeyResultUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanOwnKeyUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanPartnerKeyUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanEncodeSplitContainer)).BeginInit();
+            this.DiffieHellmanEncodeSplitContainer.Panel1.SuspendLayout();
+            this.DiffieHellmanEncodeSplitContainer.Panel2.SuspendLayout();
+            this.DiffieHellmanEncodeSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // CipherTabControl
@@ -153,7 +170,7 @@
             this.CaesarSplitContainer.Panel1.Controls.Add(this.CaesarStepUpDown);
             this.CaesarSplitContainer.Panel1.Controls.Add(this.CaesarStepLabel);
             this.CaesarSplitContainer.Panel1.Controls.Add(this.CaesarProcessModeComboBox);
-            this.CaesarSplitContainer.Panel1.Controls.Add(this.CaesarBeforeProcessButton);
+            this.CaesarSplitContainer.Panel1.Controls.Add(this.CaesarProcessButton);
             this.CaesarSplitContainer.Panel1.Controls.Add(this.CaesarPasteButton);
             this.CaesarSplitContainer.Panel1.Controls.Add(this.CaesarBeforeProcessTextBox);
             // 
@@ -203,16 +220,16 @@
             this.CaesarProcessModeComboBox.TabIndex = 3;
             this.CaesarProcessModeComboBox.SelectedIndexChanged += new System.EventHandler(this.CaesarProcessModeComboBox_SelectedIndexChanged);
             // 
-            // CaesarBeforeProcessButton
+            // CaesarProcessButton
             // 
-            this.CaesarBeforeProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CaesarBeforeProcessButton.Location = new System.Drawing.Point(577, 199);
-            this.CaesarBeforeProcessButton.Name = "CaesarBeforeProcessButton";
-            this.CaesarBeforeProcessButton.Size = new System.Drawing.Size(195, 42);
-            this.CaesarBeforeProcessButton.TabIndex = 2;
-            this.CaesarBeforeProcessButton.Text = "Зашифровать";
-            this.CaesarBeforeProcessButton.UseVisualStyleBackColor = true;
-            this.CaesarBeforeProcessButton.Click += new System.EventHandler(this.CaesarBeforeProcessButton_Click);
+            this.CaesarProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaesarProcessButton.Location = new System.Drawing.Point(577, 199);
+            this.CaesarProcessButton.Name = "CaesarProcessButton";
+            this.CaesarProcessButton.Size = new System.Drawing.Size(195, 42);
+            this.CaesarProcessButton.TabIndex = 2;
+            this.CaesarProcessButton.Text = "Зашифровать";
+            this.CaesarProcessButton.UseVisualStyleBackColor = true;
+            this.CaesarProcessButton.Click += new System.EventHandler(this.CaesarProcessButton_Click);
             // 
             // CaesarPasteButton
             // 
@@ -233,6 +250,7 @@
             this.CaesarBeforeProcessTextBox.Location = new System.Drawing.Point(3, 0);
             this.CaesarBeforeProcessTextBox.Multiline = true;
             this.CaesarBeforeProcessTextBox.Name = "CaesarBeforeProcessTextBox";
+            this.CaesarBeforeProcessTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.CaesarBeforeProcessTextBox.Size = new System.Drawing.Size(769, 193);
             this.CaesarBeforeProcessTextBox.TabIndex = 0;
             // 
@@ -265,10 +283,12 @@
             this.CaesarAfterProcessTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.CaesarAfterProcessTextBox.Enabled = false;
             this.CaesarAfterProcessTextBox.Location = new System.Drawing.Point(3, 0);
             this.CaesarAfterProcessTextBox.Multiline = true;
             this.CaesarAfterProcessTextBox.Name = "CaesarAfterProcessTextBox";
             this.CaesarAfterProcessTextBox.ReadOnly = true;
+            this.CaesarAfterProcessTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.CaesarAfterProcessTextBox.Size = new System.Drawing.Size(769, 223);
             this.CaesarAfterProcessTextBox.TabIndex = 1;
             this.CaesarAfterProcessTextBox.TextChanged += new System.EventHandler(this.CaesarAfterProcessTextBox_TextChanged);
@@ -306,7 +326,7 @@
             this.VigenereSplitContainer.Panel1.Controls.Add(this.VigenereKeyLabel);
             this.VigenereSplitContainer.Panel1.Controls.Add(this.VigenereKeyTextBox);
             this.VigenereSplitContainer.Panel1.Controls.Add(this.VigenereProcessModeComboBox);
-            this.VigenereSplitContainer.Panel1.Controls.Add(this.VigenereBeforeProcessButton);
+            this.VigenereSplitContainer.Panel1.Controls.Add(this.VigenereProcessButton);
             this.VigenereSplitContainer.Panel1.Controls.Add(this.VigenereBeforeProcessTextBox);
             this.VigenereSplitContainer.Panel1.Controls.Add(this.VigenerePasteButton);
             // 
@@ -350,16 +370,16 @@
             this.VigenereProcessModeComboBox.TabIndex = 9;
             this.VigenereProcessModeComboBox.SelectedIndexChanged += new System.EventHandler(this.VigenereProcessModeComboBox_SelectedIndexChanged);
             // 
-            // VigenereBeforeProcessButton
+            // VigenereProcessButton
             // 
-            this.VigenereBeforeProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.VigenereBeforeProcessButton.Location = new System.Drawing.Point(577, 199);
-            this.VigenereBeforeProcessButton.Name = "VigenereBeforeProcessButton";
-            this.VigenereBeforeProcessButton.Size = new System.Drawing.Size(195, 42);
-            this.VigenereBeforeProcessButton.TabIndex = 8;
-            this.VigenereBeforeProcessButton.Text = "Зашифровать";
-            this.VigenereBeforeProcessButton.UseVisualStyleBackColor = true;
-            this.VigenereBeforeProcessButton.Click += new System.EventHandler(this.VigenereBeforeProcessButton_Click);
+            this.VigenereProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.VigenereProcessButton.Location = new System.Drawing.Point(577, 199);
+            this.VigenereProcessButton.Name = "VigenereProcessButton";
+            this.VigenereProcessButton.Size = new System.Drawing.Size(195, 42);
+            this.VigenereProcessButton.TabIndex = 8;
+            this.VigenereProcessButton.Text = "Зашифровать";
+            this.VigenereProcessButton.UseVisualStyleBackColor = true;
+            this.VigenereProcessButton.Click += new System.EventHandler(this.VigenereProcessButton_Click);
             // 
             // VigenereBeforeProcessTextBox
             // 
@@ -369,6 +389,7 @@
             this.VigenereBeforeProcessTextBox.Location = new System.Drawing.Point(3, 0);
             this.VigenereBeforeProcessTextBox.Multiline = true;
             this.VigenereBeforeProcessTextBox.Name = "VigenereBeforeProcessTextBox";
+            this.VigenereBeforeProcessTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.VigenereBeforeProcessTextBox.Size = new System.Drawing.Size(769, 193);
             this.VigenereBeforeProcessTextBox.TabIndex = 5;
             // 
@@ -392,6 +413,7 @@
             this.VigenereAfterProcessTextBox.Multiline = true;
             this.VigenereAfterProcessTextBox.Name = "VigenereAfterProcessTextBox";
             this.VigenereAfterProcessTextBox.ReadOnly = true;
+            this.VigenereAfterProcessTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.VigenereAfterProcessTextBox.Size = new System.Drawing.Size(769, 223);
             this.VigenereAfterProcessTextBox.TabIndex = 7;
             this.VigenereAfterProcessTextBox.TextChanged += new System.EventHandler(this.VigenereAfterProcessTextBox_TextChanged);
@@ -445,9 +467,10 @@
             // 
             // DiffieHellmanKeySplitContainer.Panel2
             // 
+            this.DiffieHellmanKeySplitContainer.Panel2.Controls.Add(this.DiffieHellmanEncodeSplitContainer);
             this.DiffieHellmanKeySplitContainer.Panel2.Controls.Add(this.DiffieHellmanCollapseKeyButton);
             this.DiffieHellmanKeySplitContainer.Size = new System.Drawing.Size(775, 534);
-            this.DiffieHellmanKeySplitContainer.SplitterDistance = 210;
+            this.DiffieHellmanKeySplitContainer.SplitterDistance = 195;
             this.DiffieHellmanKeySplitContainer.TabIndex = 0;
             // 
             // panel1
@@ -459,7 +482,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(210, 534);
+            this.panel1.Size = new System.Drawing.Size(195, 534);
             this.panel1.TabIndex = 0;
             // 
             // groupBox3
@@ -470,7 +493,7 @@
             this.groupBox3.Controls.Add(this.DiffieHellmanGetOwnPrivateKeyButton);
             this.groupBox3.Location = new System.Drawing.Point(6, 406);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(183, 111);
+            this.groupBox3.Size = new System.Drawing.Size(183, 105);
             this.groupBox3.TabIndex = 33;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Сравнение закрытых ключей";
@@ -515,6 +538,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.DiffieHellmanGeneratorUpDown);
+            this.groupBox1.Controls.Add(this.DiffieHellmanPrimeUpDown);
             this.groupBox1.Controls.Add(this.DiffieHellmanCaptionLabel);
             this.groupBox1.Controls.Add(this.DiffieHellmanInsertUpDown);
             this.groupBox1.Controls.Add(this.DiffieHellmanButton);
@@ -522,16 +547,38 @@
             this.groupBox1.Controls.Add(this.DiffieHellmanResultLabel);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.DiffieHellmanGeneratorTextBox);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.DiffieHellmanPrimeTextBox);
+            this.groupBox1.Controls.Add(this.DiffieHellmanSendOpenKeyButton);
             this.groupBox1.Location = new System.Drawing.Point(6, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(183, 201);
             this.groupBox1.TabIndex = 33;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Открытый ключ";
+            // 
+            // DiffieHellmanGeneratorUpDown
+            // 
+            this.DiffieHellmanGeneratorUpDown.Location = new System.Drawing.Point(104, 107);
+            this.DiffieHellmanGeneratorUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.DiffieHellmanGeneratorUpDown.Name = "DiffieHellmanGeneratorUpDown";
+            this.DiffieHellmanGeneratorUpDown.Size = new System.Drawing.Size(59, 20);
+            this.DiffieHellmanGeneratorUpDown.TabIndex = 35;
+            // 
+            // DiffieHellmanPrimeUpDown
+            // 
+            this.DiffieHellmanPrimeUpDown.Location = new System.Drawing.Point(21, 107);
+            this.DiffieHellmanPrimeUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.DiffieHellmanPrimeUpDown.Name = "DiffieHellmanPrimeUpDown";
+            this.DiffieHellmanPrimeUpDown.Size = new System.Drawing.Size(59, 20);
+            this.DiffieHellmanPrimeUpDown.TabIndex = 34;
             // 
             // DiffieHellmanCaptionLabel
             // 
@@ -596,7 +643,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(104, 90);
+            this.label4.Location = new System.Drawing.Point(108, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 20;
@@ -611,13 +658,6 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "Введите открытый ключ";
             // 
-            // DiffieHellmanGeneratorTextBox
-            // 
-            this.DiffieHellmanGeneratorTextBox.Location = new System.Drawing.Point(107, 106);
-            this.DiffieHellmanGeneratorTextBox.Name = "DiffieHellmanGeneratorTextBox";
-            this.DiffieHellmanGeneratorTextBox.Size = new System.Drawing.Size(43, 20);
-            this.DiffieHellmanGeneratorTextBox.TabIndex = 18;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -627,22 +667,15 @@
             this.label3.TabIndex = 16;
             this.label3.Text = "простое число";
             // 
-            // button1
+            // DiffieHellmanSendOpenKeyButton
             // 
-            this.button1.Location = new System.Drawing.Point(11, 132);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(159, 25);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Отправить открытый ключ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // DiffieHellmanPrimeTextBox
-            // 
-            this.DiffieHellmanPrimeTextBox.Location = new System.Drawing.Point(29, 106);
-            this.DiffieHellmanPrimeTextBox.Name = "DiffieHellmanPrimeTextBox";
-            this.DiffieHellmanPrimeTextBox.Size = new System.Drawing.Size(42, 20);
-            this.DiffieHellmanPrimeTextBox.TabIndex = 17;
+            this.DiffieHellmanSendOpenKeyButton.Location = new System.Drawing.Point(11, 132);
+            this.DiffieHellmanSendOpenKeyButton.Name = "DiffieHellmanSendOpenKeyButton";
+            this.DiffieHellmanSendOpenKeyButton.Size = new System.Drawing.Size(159, 25);
+            this.DiffieHellmanSendOpenKeyButton.TabIndex = 18;
+            this.DiffieHellmanSendOpenKeyButton.Text = "Отправить открытый ключ";
+            this.DiffieHellmanSendOpenKeyButton.UseVisualStyleBackColor = true;
+            this.DiffieHellmanSendOpenKeyButton.Click += new System.EventHandler(this.DiffieHellmanSendOpenKeyButton_Click);
             // 
             // groupBox2
             // 
@@ -763,6 +796,149 @@
             this.DiffieHellmanPartnerKeyUpDown.Size = new System.Drawing.Size(59, 20);
             this.DiffieHellmanPartnerKeyUpDown.TabIndex = 24;
             // 
+            // DiffieHellmanEncodeSplitContainer
+            // 
+            this.DiffieHellmanEncodeSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanEncodeSplitContainer.IsSplitterFixed = true;
+            this.DiffieHellmanEncodeSplitContainer.Location = new System.Drawing.Point(24, 0);
+            this.DiffieHellmanEncodeSplitContainer.Name = "DiffieHellmanEncodeSplitContainer";
+            this.DiffieHellmanEncodeSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // DiffieHellmanEncodeSplitContainer.Panel1
+            // 
+            this.DiffieHellmanEncodeSplitContainer.Panel1.Controls.Add(this.label9);
+            this.DiffieHellmanEncodeSplitContainer.Panel1.Controls.Add(this.DiffieHellmanKeyTextBox);
+            this.DiffieHellmanEncodeSplitContainer.Panel1.Controls.Add(this.DiffieHellmanPasteFromFileButton);
+            this.DiffieHellmanEncodeSplitContainer.Panel1.Controls.Add(this.DiffieHellmanPasteButton);
+            this.DiffieHellmanEncodeSplitContainer.Panel1.Controls.Add(this.DiffieHellmanProcessModeComboBox);
+            this.DiffieHellmanEncodeSplitContainer.Panel1.Controls.Add(this.DiffieHellmanProcessButton);
+            this.DiffieHellmanEncodeSplitContainer.Panel1.Controls.Add(this.DiffieHellmanBeforeProcessTextBox);
+            // 
+            // DiffieHellmanEncodeSplitContainer.Panel2
+            // 
+            this.DiffieHellmanEncodeSplitContainer.Panel2.Controls.Add(this.DiffieHellmanCopyButton);
+            this.DiffieHellmanEncodeSplitContainer.Panel2.Controls.Add(this.DiffieHellmanSaveToFileButton);
+            this.DiffieHellmanEncodeSplitContainer.Panel2.Controls.Add(this.DiffieHellmanAfterProcessTextBox);
+            this.DiffieHellmanEncodeSplitContainer.Size = new System.Drawing.Size(553, 534);
+            this.DiffieHellmanEncodeSplitContainer.SplitterDistance = 263;
+            this.DiffieHellmanEncodeSplitContainer.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 241);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(33, 13);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Ключ";
+            // 
+            // DiffieHellmanKeyTextBox
+            // 
+            this.DiffieHellmanKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanKeyTextBox.Location = new System.Drawing.Point(39, 238);
+            this.DiffieHellmanKeyTextBox.Name = "DiffieHellmanKeyTextBox";
+            this.DiffieHellmanKeyTextBox.Size = new System.Drawing.Size(112, 20);
+            this.DiffieHellmanKeyTextBox.TabIndex = 14;
+            // 
+            // DiffieHellmanPasteFromFileButton
+            // 
+            this.DiffieHellmanPasteFromFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanPasteFromFileButton.Location = new System.Drawing.Point(157, 215);
+            this.DiffieHellmanPasteFromFileButton.Name = "DiffieHellmanPasteFromFileButton";
+            this.DiffieHellmanPasteFromFileButton.Size = new System.Drawing.Size(195, 20);
+            this.DiffieHellmanPasteFromFileButton.TabIndex = 13;
+            this.DiffieHellmanPasteFromFileButton.Text = "Скопировать из файла";
+            this.DiffieHellmanPasteFromFileButton.UseVisualStyleBackColor = true;
+            this.DiffieHellmanPasteFromFileButton.Click += new System.EventHandler(this.DiffieHellmanPasteFromFileButton_Click);
+            // 
+            // DiffieHellmanPasteButton
+            // 
+            this.DiffieHellmanPasteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanPasteButton.Location = new System.Drawing.Point(157, 237);
+            this.DiffieHellmanPasteButton.Name = "DiffieHellmanPasteButton";
+            this.DiffieHellmanPasteButton.Size = new System.Drawing.Size(195, 20);
+            this.DiffieHellmanPasteButton.TabIndex = 12;
+            this.DiffieHellmanPasteButton.Text = "Скопировать из буффера обмена";
+            this.DiffieHellmanPasteButton.UseVisualStyleBackColor = true;
+            this.DiffieHellmanPasteButton.Click += new System.EventHandler(this.DiffieHellmanPasteButton_Click);
+            // 
+            // DiffieHellmanProcessModeComboBox
+            // 
+            this.DiffieHellmanProcessModeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanProcessModeComboBox.FormattingEnabled = true;
+            this.DiffieHellmanProcessModeComboBox.Items.AddRange(new object[] {
+            "Шифровка",
+            "Дешифровка"});
+            this.DiffieHellmanProcessModeComboBox.Location = new System.Drawing.Point(39, 215);
+            this.DiffieHellmanProcessModeComboBox.Name = "DiffieHellmanProcessModeComboBox";
+            this.DiffieHellmanProcessModeComboBox.Size = new System.Drawing.Size(112, 21);
+            this.DiffieHellmanProcessModeComboBox.TabIndex = 11;
+            this.DiffieHellmanProcessModeComboBox.SelectedIndexChanged += new System.EventHandler(this.DiffieHellmanProcessModeComboBox_SelectedIndexChanged);
+            // 
+            // DiffieHellmanProcessButton
+            // 
+            this.DiffieHellmanProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanProcessButton.Location = new System.Drawing.Point(355, 215);
+            this.DiffieHellmanProcessButton.Name = "DiffieHellmanProcessButton";
+            this.DiffieHellmanProcessButton.Size = new System.Drawing.Size(195, 42);
+            this.DiffieHellmanProcessButton.TabIndex = 10;
+            this.DiffieHellmanProcessButton.Text = "Зашифровать";
+            this.DiffieHellmanProcessButton.UseVisualStyleBackColor = true;
+            this.DiffieHellmanProcessButton.Click += new System.EventHandler(this.DiffieHellmanProcessButton_Click);
+            // 
+            // DiffieHellmanBeforeProcessTextBox
+            // 
+            this.DiffieHellmanBeforeProcessTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanBeforeProcessTextBox.Location = new System.Drawing.Point(3, 3);
+            this.DiffieHellmanBeforeProcessTextBox.Multiline = true;
+            this.DiffieHellmanBeforeProcessTextBox.Name = "DiffieHellmanBeforeProcessTextBox";
+            this.DiffieHellmanBeforeProcessTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DiffieHellmanBeforeProcessTextBox.Size = new System.Drawing.Size(549, 207);
+            this.DiffieHellmanBeforeProcessTextBox.TabIndex = 0;
+            // 
+            // DiffieHellmanCopyButton
+            // 
+            this.DiffieHellmanCopyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanCopyButton.Enabled = false;
+            this.DiffieHellmanCopyButton.Location = new System.Drawing.Point(157, 222);
+            this.DiffieHellmanCopyButton.Name = "DiffieHellmanCopyButton";
+            this.DiffieHellmanCopyButton.Size = new System.Drawing.Size(195, 42);
+            this.DiffieHellmanCopyButton.TabIndex = 13;
+            this.DiffieHellmanCopyButton.Text = "Копировать в буффер обмена";
+            this.DiffieHellmanCopyButton.UseVisualStyleBackColor = true;
+            this.DiffieHellmanCopyButton.Click += new System.EventHandler(this.DiffieHellmanCopyButton_Click);
+            // 
+            // DiffieHellmanSaveToFileButton
+            // 
+            this.DiffieHellmanSaveToFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanSaveToFileButton.Enabled = false;
+            this.DiffieHellmanSaveToFileButton.Location = new System.Drawing.Point(355, 222);
+            this.DiffieHellmanSaveToFileButton.Name = "DiffieHellmanSaveToFileButton";
+            this.DiffieHellmanSaveToFileButton.Size = new System.Drawing.Size(195, 42);
+            this.DiffieHellmanSaveToFileButton.TabIndex = 9;
+            this.DiffieHellmanSaveToFileButton.Text = "Сохранить в файл";
+            this.DiffieHellmanSaveToFileButton.UseVisualStyleBackColor = true;
+            this.DiffieHellmanSaveToFileButton.Click += new System.EventHandler(this.DiffieHellmanSaveToFileButton_Click);
+            // 
+            // DiffieHellmanAfterProcessTextBox
+            // 
+            this.DiffieHellmanAfterProcessTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiffieHellmanAfterProcessTextBox.Enabled = false;
+            this.DiffieHellmanAfterProcessTextBox.Location = new System.Drawing.Point(3, 3);
+            this.DiffieHellmanAfterProcessTextBox.Multiline = true;
+            this.DiffieHellmanAfterProcessTextBox.Name = "DiffieHellmanAfterProcessTextBox";
+            this.DiffieHellmanAfterProcessTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DiffieHellmanAfterProcessTextBox.Size = new System.Drawing.Size(549, 214);
+            this.DiffieHellmanAfterProcessTextBox.TabIndex = 1;
+            this.DiffieHellmanAfterProcessTextBox.TextChanged += new System.EventHandler(this.DiffieHellmanAfterProcessTextBox_TextChanged);
+            // 
             // DiffieHellmanCollapseKeyButton
             // 
             this.DiffieHellmanCollapseKeyButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -814,12 +990,20 @@
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanGeneratorUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanPrimeUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanInsertUpDown)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanPartnerKeyResultUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanOwnKeyUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanPartnerKeyUpDown)).EndInit();
+            this.DiffieHellmanEncodeSplitContainer.Panel1.ResumeLayout(false);
+            this.DiffieHellmanEncodeSplitContainer.Panel1.PerformLayout();
+            this.DiffieHellmanEncodeSplitContainer.Panel2.ResumeLayout(false);
+            this.DiffieHellmanEncodeSplitContainer.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DiffieHellmanEncodeSplitContainer)).EndInit();
+            this.DiffieHellmanEncodeSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -831,7 +1015,7 @@
         private System.Windows.Forms.TabPage VigenereTab;
         private System.Windows.Forms.TabPage DiffieHellmanTab;
         private System.Windows.Forms.SplitContainer CaesarSplitContainer;
-        private System.Windows.Forms.Button CaesarBeforeProcessButton;
+        private System.Windows.Forms.Button CaesarProcessButton;
         private System.Windows.Forms.Button CaesarPasteButton;
         private System.Windows.Forms.TextBox CaesarBeforeProcessTextBox;
         private System.Windows.Forms.TextBox CaesarAfterProcessTextBox;
@@ -842,7 +1026,7 @@
         private System.Windows.Forms.Label CaesarStepLabel;
         private System.Windows.Forms.NumericUpDown CaesarStepUpDown;
         private System.Windows.Forms.SplitContainer VigenereSplitContainer;
-        private System.Windows.Forms.Button VigenereBeforeProcessButton;
+        private System.Windows.Forms.Button VigenereProcessButton;
         private System.Windows.Forms.TextBox VigenereBeforeProcessTextBox;
         private System.Windows.Forms.Button VigenerePasteButton;
         private System.Windows.Forms.TextBox VigenereAfterProcessTextBox;
@@ -853,9 +1037,7 @@
         private System.Windows.Forms.Label VigenereKeyLabel;
         private System.Windows.Forms.SplitContainer DiffieHellmanKeySplitContainer;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox DiffieHellmanGeneratorTextBox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox DiffieHellmanPrimeTextBox;
+        private System.Windows.Forms.Button DiffieHellmanSendOpenKeyButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label DiffieHellmanResultLabel;
@@ -882,6 +1064,19 @@
         private System.Windows.Forms.Button DiffieHellmanGetOwnPrivateKeyButton;
         private System.Windows.Forms.Label DiffieHellmanGetPartnerPrivateKeyLabel;
         private System.Windows.Forms.Label DiffieHellmanGetOwnPrivateKeyLabel;
+        private System.Windows.Forms.NumericUpDown DiffieHellmanGeneratorUpDown;
+        private System.Windows.Forms.NumericUpDown DiffieHellmanPrimeUpDown;
+        private System.Windows.Forms.SplitContainer DiffieHellmanEncodeSplitContainer;
+        private System.Windows.Forms.ComboBox DiffieHellmanProcessModeComboBox;
+        private System.Windows.Forms.Button DiffieHellmanProcessButton;
+        private System.Windows.Forms.TextBox DiffieHellmanBeforeProcessTextBox;
+        private System.Windows.Forms.Button DiffieHellmanSaveToFileButton;
+        private System.Windows.Forms.TextBox DiffieHellmanAfterProcessTextBox;
+        private System.Windows.Forms.Button DiffieHellmanPasteButton;
+        private System.Windows.Forms.Button DiffieHellmanCopyButton;
+        private System.Windows.Forms.Button DiffieHellmanPasteFromFileButton;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox DiffieHellmanKeyTextBox;
     }
 }
 

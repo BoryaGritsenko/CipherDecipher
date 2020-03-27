@@ -18,6 +18,7 @@ namespace CipherDecipher
 
         private bool CaesarIsToCipher = true;
         private bool VigenereIsToCipher = true;
+        private bool DiffieHellmanIsToCipher = true;
 
         public static Dictionary<int, int> DiffieOpenKeysDictionary = new Dictionary<int, int>();
 
@@ -26,8 +27,19 @@ namespace CipherDecipher
             InitializeComponent();
             this.CaesarProcessModeComboBox.SelectedIndex = 0;
             this.VigenereProcessModeComboBox.SelectedIndex = 0;
+            this.DiffieHellmanProcessModeComboBox.SelectedIndex = 0;
+        }
 
-            this.DiffieHellmanKeySplitContainer.SplitterDistance = this.DiffieHellmanCaptionLabel.Width + 50;
+        //to prevent form from lagging on resize
+        protected override void OnResizeBegin(EventArgs e)
+        {
+            SuspendLayout();
+            base.OnResizeBegin(e);
+        }
+        protected override void OnResizeEnd(EventArgs e)
+        {
+            ResumeLayout();
+            base.OnResizeEnd(e);
         }
 
         private void CaesarCopyButton_Click(object sender, EventArgs e)
@@ -41,17 +53,17 @@ namespace CipherDecipher
             //Cipher
             if (this.CaesarProcessModeComboBox.SelectedIndex == 0)
             {
-                this.CaesarBeforeProcessButton.Text = "Зашифровать";
+                this.CaesarProcessButton.Text = "Зашифровать";
                 this.CaesarIsToCipher = true;
             }
             else // Decipher
             {
-                this.CaesarBeforeProcessButton.Text = "Расшифровать";
+                this.CaesarProcessButton.Text = "Расшифровать";
                 this.CaesarIsToCipher = false;
             }
         }
 
-        private void CaesarBeforeProcessButton_Click(object sender, EventArgs e)
+        private void CaesarProcessButton_Click(object sender, EventArgs e)
         {
             if (this.CaesarBeforeProcessTextBox.Text != null)
             {
@@ -99,19 +111,23 @@ namespace CipherDecipher
         private void CaesarTab_SizeChanged(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
-                this.CaesarSplitContainer.SplitterDistance = ClientSize.Height / 2;
+                this.CaesarSplitContainer.SplitterDistance = this.CaesarTab.Size.Height / 2;
         }
 
         private void VigenereTab_SizeChanged(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
-                this.VigenereSplitContainer.SplitterDistance = ClientSize.Height / 2;
+                this.VigenereSplitContainer.SplitterDistance = this.CaesarTab.Size.Height / 2;
         }
 
         private void DiffieHellmanTab_SizeChanged(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
-                this.DiffieHellmanKeySplitContainer.SplitterDistance = this.DiffieHellmanCaptionLabel.Width + 50;
+            {
+                this.DiffieHellmanKeySplitContainer.SplitterDistance = this.DiffieHellmanCaptionLabel.Width + 25;
+                this.DiffieHellmanEncodeSplitContainer.SplitterDistance = this.DiffieHellmanTab.Size.Height / 2;
+            }
+                
         }
 
         private void VigenerePasteButton_Click(object sender, EventArgs e)
@@ -129,12 +145,12 @@ namespace CipherDecipher
             //Cipher
             if (this.VigenereProcessModeComboBox.SelectedIndex == 0)
             {
-                this.VigenereBeforeProcessButton.Text = "Зашифровать";
+                this.VigenereProcessButton.Text = "Зашифровать";
                 this.VigenereIsToCipher = true;
             }
             else // Decipher
             {
-                this.VigenereBeforeProcessButton.Text = "Расшифровать";
+                this.VigenereProcessButton.Text = "Расшифровать";
                 this.VigenereIsToCipher = false;
             }
         }
@@ -160,7 +176,7 @@ namespace CipherDecipher
             sfd.Dispose();
         }
 
-        private void VigenereBeforeProcessButton_Click(object sender, EventArgs e)
+        private void VigenereProcessButton_Click(object sender, EventArgs e)
         {
             if (this.VigenereKeyTextBox.Text.Length > 0)
             {
@@ -174,15 +190,12 @@ namespace CipherDecipher
                 );
             }
             else
-            {
                 MessageBox.Show(
                     "Введите ключ", 
                     "Сообщение", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Error
                 );
-            }
-            
         }
 
         private void VigenereAfterProcessTextBox_TextChanged(object sender, EventArgs e)
@@ -209,28 +222,26 @@ namespace CipherDecipher
 
                 if (buff != null)
                 {
-                    this.DiffieHellmanPrimeTextBox.Text = buff.Value.Key.ToString();
-                    this.DiffieHellmanGeneratorTextBox.Text = buff.Value.Value.ToString();
+                    this.DiffieHellmanPrimeUpDown.Value = buff.Value.Key;
+                    this.DiffieHellmanGeneratorUpDown.Value = buff.Value.Value;
                 }
             }
             else
-            {
                 MessageBox.Show(
                     "Введите корректное число от 3 до 1000",
                     "Ошибка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
-            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        { 
-            bool isP = int.TryParse(this.DiffieHellmanPrimeTextBox.Text, out int prime);
-            bool isG = int.TryParse(this.DiffieHellmanGeneratorTextBox.Text, out int gen);
+        private void DiffieHellmanSendOpenKeyButton_Click(object sender, EventArgs e)
+        {
+            var prime = Convert.ToInt32(this.DiffieHellmanPrimeUpDown.Value);
+            var gen = Convert.ToInt32(this.DiffieHellmanGeneratorUpDown.Value);
             //if input is number
 
-            if (isP && isG && CiphersDeciphers.IsPrime(prime) && CiphersDeciphers.IsPrimitiveRoot(gen, prime))
+            if (CiphersDeciphers.IsPrime(prime) && CiphersDeciphers.IsPrimitiveRoot(gen, prime))
                 this.DiffieHellmanResultLabel.Text = $"{prime},{gen}";
             else
                 MessageBox.Show(
@@ -282,29 +293,127 @@ namespace CipherDecipher
 
         private void DiffieHellmanGetOwnPrivateKeyButton_Click(object sender, EventArgs e)
         {
-            if (DiffieHellmanOwnKeyUpDown.Value > 0 && DiffieHellmanPartnerKeyUpDown.Value > 0)
+            if (this.DiffieHellmanOwnKeyUpDown.Value > 0 && this.DiffieHellmanPartnerKeyUpDown.Value > 0)
             {
                 string[] result = this.DiffieHellmanResultLabel.Text.Split(',');
 
                 var prime = BigInteger.Parse(result[0]);
-                var gen = BigInteger.Parse(DiffieHellmanPartnerKeyResultUpDown.Value.ToString());
-                var key = Convert.ToInt16(DiffieHellmanOwnKeyUpDown.Value);
+                var gen = BigInteger.Parse(this.DiffieHellmanPartnerKeyResultUpDown.Value.ToString());
+                var key = Convert.ToInt16(this.DiffieHellmanOwnKeyUpDown.Value);
 
-                DiffieHellmanGetOwnPrivateKeyLabel.Text = CiphersDeciphers.DiffieHellmanCalcKey(key, gen, prime).ToString();
+                this.DiffieHellmanGetOwnPrivateKeyLabel.Text = CiphersDeciphers.DiffieHellmanCalcKey(key, gen, prime).ToString();
             }
         }
 
         private void DiffieHellmanGetPartnerPrivateKeyButton_Click(object sender, EventArgs e)
         {
-            if (DiffieHellmanPartnerKeyUpDown.Value > 0 && DiffieHellmanOwnKeyResultLabel.Text != String.Empty)
+            if (this.DiffieHellmanPartnerKeyUpDown.Value > 0 && this.DiffieHellmanOwnKeyResultLabel.Text != String.Empty)
             {
                 string[] result = this.DiffieHellmanResultLabel.Text.Split(',');
 
                 var prime = BigInteger.Parse(result[0]);
-                var gen = BigInteger.Parse(DiffieHellmanOwnKeyResultLabel.Text);
-                var key = Convert.ToInt16(DiffieHellmanPartnerKeyUpDown.Value);
+                var gen = BigInteger.Parse(this.DiffieHellmanOwnKeyResultLabel.Text);
+                var key = Convert.ToInt16(this.DiffieHellmanPartnerKeyUpDown.Value);
 
-                DiffieHellmanGetPartnerPrivateKeyLabel.Text = CiphersDeciphers.DiffieHellmanCalcKey(key, gen, prime).ToString();
+                this.DiffieHellmanGetPartnerPrivateKeyLabel.Text = CiphersDeciphers.DiffieHellmanCalcKey(key, gen, prime).ToString();
+            }
+        }
+
+        private void DiffieHellmanAfterProcessTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (this.DiffieHellmanAfterProcessTextBox.Text.Length > 0)
+            {
+                this.DiffieHellmanCopyButton.Enabled = true;
+                this.DiffieHellmanSaveToFileButton.Enabled = true;
+            }
+            else
+            {
+                this.DiffieHellmanCopyButton.Enabled = false;
+                this.DiffieHellmanSaveToFileButton.Enabled = false;
+            }
+        }
+
+        private void DiffieHellmanProcessModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.DiffieHellmanProcessModeComboBox.SelectedIndex == 0)
+            {
+                this.DiffieHellmanProcessButton.Text = "Зашифровать";
+                this.DiffieHellmanIsToCipher = true;
+            }
+            else // Decipher
+            {
+                this.DiffieHellmanProcessButton.Text = "Расшифровать";
+                this.DiffieHellmanIsToCipher = false;
+            }
+        }
+
+        private void DiffieHellmanPasteFromFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "txt files (*.txt)|*.txt";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+                this.DiffieHellmanBeforeProcessTextBox.Text = File.ReadAllText(ofd.FileName, Encoding.GetEncoding(1251));
+        }
+
+        private void DiffieHellmanPasteButton_Click(object sender, EventArgs e)
+        {
+            if (this.DiffieHellmanBeforeProcessTextBox.Text.Length > 0 && Clipboard.ContainsText())
+            {
+                var result = MessageBox.Show(
+                    "Вставленный текст заменит текущий. Заменить?", 
+                    "Предупреждение", 
+                    MessageBoxButtons.OKCancel, 
+                    MessageBoxIcon.Warning
+                );
+
+                if (result == DialogResult.OK)
+                    this.DiffieHellmanBeforeProcessTextBox.Text = Clipboard.GetText();
+            }
+        }
+
+        private void DiffieHellmanCopyButton_Click(object sender, EventArgs e)
+        {
+            if (this.DiffieHellmanAfterProcessTextBox.Text.Length > 0)
+                Clipboard.SetText(this.DiffieHellmanAfterProcessTextBox.Text);
+        }
+
+        private void DiffieHellmanSaveToFileButton_Click(object sender, EventArgs e)
+        {
+            if (this.DiffieHellmanAfterProcessTextBox.Text.Length > 0)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "txt files (*.txt)|*.txt";
+
+                if(sfd.ShowDialog() == DialogResult.OK)
+                    File.WriteAllText(sfd.FileName, this.DiffieHellmanAfterProcessTextBox.Text);
+            }
+              
+        }
+
+        private void DiffieHellmanProcessButton_Click(object sender, EventArgs e)
+        {
+            if (this.DiffieHellmanGetOwnPrivateKeyLabel.Text.Length > 0)
+            {
+                if (this.DiffieHellmanKeyTextBox.Text.Length > 0)
+                {
+                    string temp = Regex.Replace(this.DiffieHellmanKeyTextBox.Text, " ", string.Empty);
+
+                    temp = CiphersDeciphers.TransformKeyString(temp, Convert.ToInt32(this.DiffieHellmanGetOwnPrivateKeyLabel.Text));
+
+                    this.DiffieHellmanAfterProcessTextBox.Text = CiphersDeciphers.VigenereEncodeDecode(
+                        this.DiffieHellmanBeforeProcessTextBox.Text,
+                        temp,
+                        this.DiffieHellmanIsToCipher
+                    );
+                }
+                else
+                    MessageBox.Show(
+                        "Введите ключ",
+                        "Сообщение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
             }
         }
     }

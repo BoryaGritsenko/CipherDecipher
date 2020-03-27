@@ -40,7 +40,7 @@ namespace CipherDecipher
             return result;
         }
 
-        public static string VigenereEncodeDecode(string text, string key, bool VigenereIsToCipher)
+        public static string VigenereEncodeDecode(string text, string key, bool isToCipher)
         {
             string result = "";
             int keywordIndex = 0;
@@ -60,10 +60,10 @@ namespace CipherDecipher
 
                     int p;
 
-                    if (VigenereIsToCipher)
-                        p = (alphabet.IndexOf(symbol) + alphabet.IndexOf(key[keywordIndex])) % alphabet.Length;
+                    if (isToCipher)
+                        p = (alphabet.IndexOf(symbol) + Math.Abs(alphabet.IndexOf(key[keywordIndex]))) % alphabet.Length;
                     else
-                        p = (alphabet.IndexOf(symbol) + alphabet.Length - alphabet.IndexOf(key[keywordIndex])) % alphabet.Length;
+                        p = (alphabet.IndexOf(symbol) + alphabet.Length - Math.Abs(alphabet.IndexOf(key[keywordIndex]))) % alphabet.Length;
 
                     result += alphabet[p];
 
@@ -155,6 +155,33 @@ namespace CipherDecipher
         public static BigInteger DiffieHellmanCalcKey(int key, BigInteger gen, BigInteger prime)
         {
             return BigInteger.Remainder(BigInteger.Pow(gen, key), prime);
+        }
+
+        public static string TransformKeyString(string text, int key)
+        {
+            string result = "";
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                bool isEnglish = Constants.ENG_ALPHABET.IndexOf(text[i]) >= 0;
+                bool isRussian = Constants.RUS_ALPHABET.IndexOf(text[i]) >= 0;
+
+                if (!isEnglish && !isRussian)
+                    result += text[i];
+                else
+                {
+                    string alphabet = (isEnglish)
+                    ? Constants.ENG_ALPHABET
+                    : Constants.RUS_ALPHABET;
+
+                    if (i % 2 == 0)
+                        result += alphabet.ElementAt(Math.Abs(alphabet.IndexOf(text[i]) - key) % alphabet.Length);
+                    else
+                        result += alphabet.ElementAt(Math.Abs(alphabet.IndexOf(text[i]) + key) % alphabet.Length);
+                }
+            }
+            Console.WriteLine(result);
+            return result;
         }
     }
 }
