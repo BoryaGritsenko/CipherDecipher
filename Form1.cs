@@ -259,6 +259,7 @@ namespace CipherDecipher
             this.DiffieHellmanCollapseKeyButton.Text = (this.DiffieHellmanKeySplitContainer.Panel1Collapsed)
                 ? "→→→"  // To open
                 : "←←←"; // To close
+            DiffieHellmanTab_SizeChanged(sender, e);
         }
 
         private void DiffieHellmanCalcOwnKeyButton_Click(object sender, EventArgs e)
